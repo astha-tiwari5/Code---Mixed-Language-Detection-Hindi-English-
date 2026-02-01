@@ -24,3 +24,81 @@ This project implements **token-level language identification** for **Hindi–En
 ---
 
 ## 🏗️ Project Architecture
+
+Input Sentence
+↓
+Word Tokenization
+↓
+XLM-RoBERTa Tokenizer
+↓
+Subword Embeddings
+↓
+Token Classification Head
+↓
+Word-level Language Labels (HI / EN)
+
+
+
+---
+
+## 📂 Project Structure
+
+code-mixed-language-detection/
+│
+├── app.py # Streamlit web app
+├── notebook.ipynb # Experiments and evaluation
+├── requirements.txt # Python dependencies
+├── README.md # Project documentation
+└── .gitignore
+
+
+---
+
+## 🧪 Dataset
+A small manually annotated Sentence: आज meeting थी boss के साथ
+Tokens: आज | meeting | थी | boss | के | साथ
+Labels: HI | EN | HI | EN | HI | HI
+
+
+> ⚠️ Note: The dataset is intentionally small and used only for baseline evaluation.
+
+आज meeting थी boss के साथ
+आज → HI
+meeting → EN
+थी → HI
+boss → EN
+के → HI
+साथ → HI
+
+
+📊 Evaluation
+
+Evaluation is performed using precision, recall, and F1-score.
+
+precision    recall  f1-score
+EN    0.30      1.00     0.46
+HI    0.00      0.00     0.00
+
+⚠️ Limitations
+
+Model is not fine-tuned on Hinglish data
+Romanized Hindi (e.g., kal, tum, kaha) is often misclassified
+Very small dataset
+Script bias toward English
+
+🔮 Future Work
+
+Fine-tune XLM-RoBERTa on large Hinglish datasets
+Add CRF layer for better sequence consistency
+Extend to multi-language code-mixing
+Support Romanized Hindi
+Integrate sentence-level aggregation
+
+🧪 Technologies Used
+
+Python
+PyTorch
+HuggingFace Transformers
+XLM-RoBERTa
+Scikit-learn
+Streamlit
